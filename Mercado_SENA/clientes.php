@@ -1,6 +1,6 @@
 <?php
 // concexion.php
-require 'db.php';
+require '/xampp/htdocs/Mercado_SENA/config/db.php';
 
 $sql = "CREATE TABLE IF NOT EXISTS clientes (
     ID_CLIENTE INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,14 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo 'Por favor complete todos los campos obligatorios.';
     }
-    header('Location: clientes.php');
+    header('Location: /Mercado_SENA/clientes.php');
     exit;
 }
 
 if (isset($_GET['eliminar'])) {
     $id_cliente = intval($_GET['eliminar']);
     $conn->query("DELETE FROM clientes WHERE ID_CLIENTE = $id_cliente");
-    header('Location: clientes.php');
+    header('Location: /Mercado_SENA/clientes.php');
     exit;
 }
 
@@ -56,11 +56,11 @@ $result = $conn->query("SELECT * FROM clientes");
 <head>
     <meta charset="UTF-8">
     <title>CRUD de Clientes</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="/Mercado_SENA/assets/styles.css">
 </head>
 <body>
     <h2>Formulario de Clientes</h2>
-    <form action="clientes.php" method="POST">
+    <form action="/Mercado_SENA/clientes.php" method="POST">
         <input type="hidden" name="id_cliente" value="<?= isset($_GET['editar']) ? htmlspecialchars($_GET['editar']) : '' ?>">
         <label>Nombre: <input type="text" name="nombre" value="<?= isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : '' ?>" required></label><br>
         <label>Email: <input type="email" name="email" value="<?= isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '' ?>" required></label><br>
@@ -85,14 +85,14 @@ $result = $conn->query("SELECT * FROM clientes");
             <td><?= htmlspecialchars($row['EMAIL_CLIENTE']) ?></td>
             <td><?= htmlspecialchars($row['TELEFONO_CLIENTE']) ?></td>
             <td>
-                <a href="clientes.php?editar=<?= $row['ID_CLIENTE'] ?>&nombre=<?= urlencode($row['NOMBRE_CLIENTE']) ?>&email=<?= urlencode($row['EMAIL_CLIENTE']) ?>&telefono=<?= urlencode($row['TELEFONO_CLIENTE']) ?>">Editar</a> | 
-                <a href="clientes.php?eliminar=<?= $row['ID_CLIENTE'] ?>" onclick="return confirm('¿Seguro que deseas eliminar este cliente?');">Eliminar</a>
+                <a href="/Mercado_SENA/clientes.php?editar=<?= $row['ID_CLIENTE'] ?>&nombre=<?= urlencode($row['NOMBRE_CLIENTE']) ?>&email=<?= urlencode($row['EMAIL_CLIENTE']) ?>&telefono=<?= urlencode($row['TELEFONO_CLIENTE']) ?>">Editar</a> | 
+                <a href="/Mercado_SENA/clientes.php?eliminar=<?= $row['ID_CLIENTE'] ?>" onclick="return confirm('¿Seguro que deseas eliminar este cliente?');">Eliminar</a>
             </td>
         </tr>
         <?php endwhile; ?>
     </table>
-    <br><br><a href="products.php">Ir a Productos</a><br><br>
-    <a href="category.php">Volver a Categoria</a><br><br>
-    <a href="login.php">Cerrar sesion</a>
+    <br><br><a href="/Mercado_SENA/products.php">Ir a Productos</a><br><br>
+    <a href="/Mercado_SENA/crud_categoria/category.php">Volver a Categoria</a><br><br>
+    <a href="/Mercado_SENA/login/login.php">Cerrar sesion</a>
 </body>
 </html>
