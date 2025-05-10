@@ -1,2 +1,2 @@
-# Mercado_SENA
-Proyecto en el SENA CRUD PHP
+# Mercado
+Proyecto en el CRUD PHP
